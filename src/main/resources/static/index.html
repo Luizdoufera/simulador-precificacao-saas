@@ -4,10 +4,124 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ChaveCerta – Simulador de Precificação</title>
+    <link rel="stylesheet" href="estilo.css">
 </head>
 <body>
-    <h1>ChaveCerta – Simulador de Precificação SaaS</h1>
-    <p><strong>Dados fictícios – simulação</strong></p>
-    <p>Aplicação em construção (Passo 4a: esqueleto do projeto).</p>
+<main>
+    <!-- RF13: identificação -->
+    <header>
+        <h1>ChaveCerta – Simulador de Precificação SaaS</h1>
+        <p class="aviso">Dados fictícios – simulação</p>
+        <p>Grupo: Gubio Garcia dos Santos e Luiz Fernando de Pádua Paixão<br>
+            Engenharia Econômica – Faculdade SENAI FATESG</p>
+    </header>
+
+    <form id="formulario" novalidate>
+        <!-- RF01: premissas gerais -->
+        <fieldset>
+            <legend>Premissas gerais (valores mensais)</legend>
+
+            <label for="custoFixo">Custo fixo mensal (R$/mês)</label>
+            <input id="custoFixo" type="text" inputmode="decimal">
+            <span class="erro" data-erro="custoFixo"></span>
+
+            <label for="custoVariavel">Custo variável por oficina (R$/oficina/mês)</label>
+            <input id="custoVariavel" type="text" inputmode="decimal">
+            <span class="erro" data-erro="custoVariavel"></span>
+
+            <label for="taxaPercentual">Taxa hipotética de tributos (% sobre a receita)</label>
+            <input id="taxaPercentual" type="text" inputmode="decimal">
+            <span class="erro" data-erro="taxaPercentual"></span>
+
+            <label for="beneficio">Benefício percebido pelo cliente (texto)</label>
+            <textarea id="beneficio" rows="3"></textarea>
+        </fieldset>
+
+        <!-- RF02: três propostas -->
+        <fieldset>
+            <legend>Propostas de preço</legend>
+            <div class="propostas">
+                <div class="proposta">
+                    <h3>Proposta A</h3>
+                    <label for="preco-0">Preço mensal (R$/oficina)</label>
+                    <input id="preco-0" type="text" inputmode="decimal">
+                    <span class="erro" data-erro="propostas[0].preco"></span>
+                    <label for="clientes-0">Oficinas estimadas</label>
+                    <input id="clientes-0" type="text" inputmode="numeric">
+                    <span class="erro" data-erro="propostas[0].clientes"></span>
+                </div>
+                <div class="proposta">
+                    <h3>Proposta B</h3>
+                    <label for="preco-1">Preço mensal (R$/oficina)</label>
+                    <input id="preco-1" type="text" inputmode="decimal">
+                    <span class="erro" data-erro="propostas[1].preco"></span>
+                    <label for="clientes-1">Oficinas estimadas</label>
+                    <input id="clientes-1" type="text" inputmode="numeric">
+                    <span class="erro" data-erro="propostas[1].clientes"></span>
+                </div>
+                <div class="proposta">
+                    <h3>Proposta C</h3>
+                    <label for="preco-2">Preço mensal (R$/oficina)</label>
+                    <input id="preco-2" type="text" inputmode="decimal">
+                    <span class="erro" data-erro="propostas[2].preco"></span>
+                    <label for="clientes-2">Oficinas estimadas</label>
+                    <input id="clientes-2" type="text" inputmode="numeric">
+                    <span class="erro" data-erro="propostas[2].clientes"></span>
+                </div>
+            </div>
+        </fieldset>
+
+        <div class="botoes">
+            <button type="button" id="btnExemplo">Carregar exemplo</button>
+            <button type="submit" id="btnCalcular">Calcular</button>
+        </div>
+        <p class="erro" id="erroGeral"></p>
+    </form>
+
+    <!-- RF06: tabela comparativa (aparece só depois de calcular sem erros) -->
+    <section id="resultados" hidden>
+        <h2>Comparação das propostas</h2>
+        <div class="tabela-rolagem">
+            <table>
+                <thead>
+                <tr>
+                    <th>Indicador</th>
+                    <th>Proposta A</th>
+                    <th>Proposta B</th>
+                    <th>Proposta C</th>
+                </tr>
+                </thead>
+                <tbody id="corpoTabela"></tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- RF13: explicação dos indicadores -->
+    <section>
+        <h2>O que significa cada indicador</h2>
+        <dl class="explicacao">
+            <dt>Receita</dt>
+            <dd>Preço × oficinas. Quanto entra por mês.</dd>
+            <dt>Tributos</dt>
+            <dd>Receita × taxa. A taxa é uma premissa didática editável, não uma alíquota legal.</dd>
+            <dt>Custo variável total</dt>
+            <dd>Custo variável por oficina × oficinas.</dd>
+            <dt>Resultado mensal</dt>
+            <dd>Receita − custo fixo − custo variável total − tributos. Positivo = sobra; negativo = falta.
+                É um saldo operacional didático, não lucro contábil.</dd>
+            <dt>Margem</dt>
+            <dd>100 × resultado ÷ receita. Só é calculada quando a receita é maior que zero.</dd>
+            <dt>Contribuição unitária</dt>
+            <dd>Preço × (1 − taxa) − custo variável. Quanto cada oficina contribui para pagar o custo fixo.</dd>
+            <dt>Equilíbrio</dt>
+            <dd>Menor número inteiro de oficinas que cobre o custo fixo: teto(custo fixo ÷ contribuição unitária).
+                Não existe quando a contribuição unitária é menor ou igual a zero.</dd>
+            <dt>Folga</dt>
+            <dd>Oficinas estimadas − equilíbrio. Negativa significa abaixo do equilíbrio.</dd>
+        </dl>
+    </section>
+</main>
+
+<script src="app.js"></script>
 </body>
 </html>

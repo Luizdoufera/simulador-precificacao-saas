@@ -1,0 +1,166 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 15px;
+    color: #1f2933;
+    background: #f5f6f8;
+}
+
+main {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 24px 16px 48px;
+}
+
+h1 {
+    margin: 0 0 4px;
+    font-size: 1.6rem;
+}
+
+h2 {
+    font-size: 1.2rem;
+    margin-top: 32px;
+}
+
+h3 {
+    margin: 0 0 8px;
+    font-size: 1rem;
+}
+
+.aviso {
+    display: inline-block;
+    margin: 4px 0;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: #fff4d6;
+    color: #7a5200;
+    font-weight: 600;
+}
+
+fieldset {
+    margin: 16px 0;
+    padding: 16px;
+    border: 1px solid #d5d9e0;
+    border-radius: 8px;
+    background: #fff;
+}
+
+legend {
+    padding: 0 6px;
+    font-weight: 600;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    font-size: 0.9rem;
+}
+
+input,
+textarea {
+    width: 100%;
+    max-width: 320px;
+    margin-top: 4px;
+    padding: 6px 8px;
+    border: 1px solid #b8bfca;
+    border-radius: 4px;
+    font: inherit;
+}
+
+textarea {
+    max-width: 100%;
+}
+
+input.invalido {
+    border-color: #c62828;
+    background: #fff5f5;
+}
+
+.erro {
+    display: block;
+    min-height: 1em;
+    color: #c62828;
+    font-size: 0.85rem;
+}
+
+.propostas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.proposta {
+    flex: 1 1 220px;
+}
+
+.botoes {
+    display: flex;
+    gap: 12px;
+}
+
+button {
+    padding: 8px 18px;
+    border: 1px solid #1f5fae;
+    border-radius: 4px;
+    background: #fff;
+    color: #1f5fae;
+    font: inherit;
+    cursor: pointer;
+}
+
+button[type="submit"] {
+    background: #1f5fae;
+    color: #fff;
+}
+
+.tabela-rolagem {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+}
+
+th,
+td {
+    padding: 8px 10px;
+    border: 1px solid #d5d9e0;
+    text-align: right;
+    white-space: nowrap;
+}
+
+th:first-child,
+td:first-child {
+    text-align: left;
+}
+
+thead th {
+    background: #eef1f5;
+}
+
+tr.destaque td {
+    font-weight: 600;
+}
+
+td.negativo {
+    color: #c62828;
+}
+
+td.quebra {
+    white-space: normal;
+}
+
+.explicacao dt {
+    margin-top: 10px;
+    font-weight: 600;
+}
+
+.explicacao dd {
+    margin: 2px 0 0;
+}
