@@ -17,7 +17,7 @@ Somos estudantes e precisamos compreender e validar todo o código. Explique as 
 - `docs/Atividade_ Aplicações_de_Engenharia_Economica_GL.pdf` – documento do grupo (delimitação e solução calculada)
 - `requisitos.md` – requisitos RF01 a RF13, RNF01 a RNF06 e extensões da versão 2
 - `modelo_calculos.md` – fórmulas, convenções, casos especiais e valores de referência dos testes (fonte oficial dos cálculos)
-- `registro_ia.md` – diário das interações com a IA (**registrar cada interação relevante**)
+- `registro_ia.md` – diário das interações com a IA (registrar **somente quando o usuário pedir**)
 
 ## Regras obrigatórias
 - Não invente fórmulas, dados de mercado ou alíquotas legais. As fórmulas estão em `modelo_calculos.md`.
@@ -25,7 +25,7 @@ Somos estudantes e precisamos compreender e validar todo o código. Explique as 
 - Não afirme que um teste passou sem executá-lo. Informe comandos e resultados reais.
 - Spring Boot (apenas `spring-boot-starter-web` e `spring-boot-starter-test`) é o único framework permitido. Não adicione banco de dados, segurança, serviços externos nem funcionalidades fora do escopo da versão 1.
 - Manter a versão 1 o mais simples possível (pouco tempo disponível).
-- Ao final de cada interação, acrescentar uma entrada em `registro_ia.md`.
+- Só acrescentar entradas em `registro_ia.md` quando o usuário pedir explicitamente.
 
 ## Tecnologia e estrutura
 - Java 23 + Spring Boot 3 + Maven. Execução local: `mvn spring-boot:run` e abrir `http://localhost:8080`.
