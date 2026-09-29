@@ -46,3 +46,14 @@ Para cada interação relevante, copie o modelo abaixo:
 **Verificação executada:** `mvn -q -B package -DskipTests` terminou com código 0. `java -jar target/chavecerta-0.1.0.jar` iniciou o servidor ("Tomcat started on port 8080"), e `http://localhost:8080/` respondeu HTTP 200 com a página inicial.
 **Arquivos alterados:** `pom.xml`, `ChaveCertaApplication.java`, `application.properties`, `static/index.html`, `.gitignore`, `README.md`, `registro_ia.md`.
 **Validação do grupo:** _(preencher)_
+
+### 04 – 29/09/2026 – Passo 4b (núcleo de cálculo e validação)
+**Etapa:** Passo 4b
+**Prompt:** "Pode começar o 4b e pode fazer dois commits para essa implementação e depois quero ver como está ficando."
+**Resposta da IA:** criou o pacote `calculo`, em Java puro e sem Spring, em dois commits.
+- Commit 1: records `Premissas`, `Proposta` e `ResultadoProposta`, mais `CalculadoraPrecificacao` com as fórmulas do `modelo_calculos.md`. Testes: T1, T2, T4–T8, exemplo A/B/C, identidade de conferência, custo fixo zero, contribuição zero e teto arredondado.
+- Commit 2: `EntradaSimulacao`, `ErroValidacao` e `Validador` (RF09/RNF06: vazio, não numérico, negativo, taxa de 0% a 99,99%, oficinas inteiras, três propostas). Testes: T3 e as demais regras.
+
+**Verificação executada:** `mvn -B test` → `Tests run: 22, Failures: 0, Errors: 0, Skipped: 0`, `BUILD SUCCESS` (12 da calculadora e 10 do validador).
+**Arquivos alterados:** `src/main/java/br/senai/chavecerta/calculo/*` (7 arquivos), `src/test/java/br/senai/chavecerta/calculo/*` (2 arquivos), `registro_ia.md`.
+**Validação do grupo:** _(preencher)_
