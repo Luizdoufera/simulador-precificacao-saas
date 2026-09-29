@@ -38,3 +38,11 @@ Para cada interação relevante, copie o modelo abaixo:
 **Resposta da IA:** perguntou qual tipo de projeto Java seria feito. O grupo escolheu **Java web com Spring Boot**. A IA criou `contexto_atividade.md` e este registro, atualizou `CLAUDE.md` para Java/Spring Boot e corrigiu `requisitos.md` e `modelo_calculos.md` (RNF01, RNF02, RNF05, novo RNF06, RF08, RF09, RF10, caso fixo = 0 com contribuição ≤ 0, arredondamento em Java). Sugeriu uma estrutura para o Passo 4, que ainda não foi implementada e aguarda revisão.
 **Arquivos alterados:** `CLAUDE.md`, `requisitos.md`, `modelo_calculos.md`; criados `contexto_atividade.md` e `registro_ia.md`.
 **Validação do grupo:** _(preencher)_
+
+### 03 – 29/09/2026 – Repositório Git e Passo 4a (esqueleto Spring Boot)
+**Etapa:** Passo 4a
+**Prompt:** "Podemos prosseguir assim, mas eu precisava de uma certa progressão no projeto do GitHub; colocar tudo de uma vez não é o mais indicado. Aqui está meu repositório: https://github.com/Luizdoufera/simulador-precificacao-saas.git. Vamos pouco a pouco. Estrutura de commit: nome, data do commit e uma descrição breve da implementação."
+**Resposta da IA:** ligou a pasta ao repositório remoto, que já tinha um README, e fez commits pequenos no padrão `Nome - DD/MM/AAAA - Descrição`. Commit 1: documentação. Commit 2: esqueleto Spring Boot 3.5.16 com `pom.xml`, classe principal, página inicial provisória, `.gitignore` e README com instruções.
+**Verificação executada:** `mvn -q -B package -DskipTests` terminou com código 0. `java -jar target/chavecerta-0.1.0.jar` iniciou o servidor ("Tomcat started on port 8080"), e `http://localhost:8080/` respondeu HTTP 200 com a página inicial.
+**Arquivos alterados:** `pom.xml`, `ChaveCertaApplication.java`, `application.properties`, `static/index.html`, `.gitignore`, `README.md`, `registro_ia.md`.
+**Validação do grupo:** _(preencher)_
