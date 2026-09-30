@@ -1,6 +1,8 @@
 package br.senai.chavecerta.web;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -48,6 +50,26 @@ class SimulacaoControllerTest {
                 .andExpect(jsonPath("$.grafico.series[0].pontos[0].resultado").value(-3000.0))
                 .andExpect(jsonPath("$.interpretacao").value(org.hamcrest.Matchers.startsWith(
                         "Nas premissas consideradas, a proposta C (R$ 70)")));
+    }
+
+    @Test
+    @DisplayName("Exportar CSV: 200, arquivo para download com os resultados (RF12)")
+    void exportarCsv() throws Exception {
+        mvc.perform(post("/api/exportar-csv").contentType(MediaType.APPLICATION_JSON).content(json("3000")))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith("text/csv"))
+                .andExpect(header().string("Content-Disposition",
+                        org.hamcrest.Matchers.containsString("simulacao_chavecerta.csv")))
+                .andExpect(content().string(org.hamcrest.Matchers.containsString(
+                        "Resultado mensal (R$);380,00;500,00;1240,00")));
+    }
+
+    @Test
+    @DisplayName("Exportar CSV com entrada inválida: 400 com os erros")
+    void exportarCsvInvalido() throws Exception {
+        mvc.perform(post("/api/exportar-csv").contentType(MediaType.APPLICATION_JSON).content(json("")))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.erros[0].mensagem").value("Informe o custo fixo mensal"));
     }
 
     @Test
