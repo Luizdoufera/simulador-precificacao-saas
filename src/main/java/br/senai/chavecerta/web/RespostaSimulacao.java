@@ -15,14 +15,15 @@ public record RespostaSimulacao(
         List<ErroValidacao> erros,
         Premissas premissas,
         List<ResultadoProposta> resultados,
-        Grafico grafico) {
+        Grafico grafico,
+        String interpretacao) {
 
     static RespostaSimulacao comErros(List<ErroValidacao> erros) {
-        return new RespostaSimulacao(erros, null, List.of(), null);
+        return new RespostaSimulacao(erros, null, List.of(), null, null);
     }
 
     static RespostaSimulacao comResultados(Premissas premissas, List<ResultadoProposta> resultados,
-                                           Grafico grafico) {
-        return new RespostaSimulacao(List.of(), premissas, resultados, grafico);
+                                           Grafico grafico, String interpretacao) {
+        return new RespostaSimulacao(List.of(), premissas, resultados, grafico, interpretacao);
     }
 }

@@ -45,7 +45,9 @@ class SimulacaoControllerTest {
                 .andExpect(jsonPath("$.resultados[2].resultado").value(1240.0))
                 .andExpect(jsonPath("$.grafico.eixoXMaximo").value(260))
                 .andExpect(jsonPath("$.grafico.series.length()").value(3))
-                .andExpect(jsonPath("$.grafico.series[0].pontos[0].resultado").value(-3000.0));
+                .andExpect(jsonPath("$.grafico.series[0].pontos[0].resultado").value(-3000.0))
+                .andExpect(jsonPath("$.interpretacao").value(org.hamcrest.Matchers.startsWith(
+                        "Nas premissas consideradas, a proposta C (R$ 70)")));
     }
 
     @Test

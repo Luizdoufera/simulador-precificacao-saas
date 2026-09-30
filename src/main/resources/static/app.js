@@ -206,6 +206,7 @@ async function calcular(evento) {
         mostrarErros(dados.erros);
         return;
     }
+    campo("interpretacao").textContent = dados.interpretacao;
     mostrarTabela(dados);
     mostrarGrafico(dados.grafico);
 }

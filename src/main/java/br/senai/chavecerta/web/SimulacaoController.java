@@ -4,6 +4,7 @@ import br.senai.chavecerta.calculo.CalculadoraPrecificacao;
 import br.senai.chavecerta.calculo.EntradaSimulacao;
 import br.senai.chavecerta.calculo.ErroValidacao;
 import br.senai.chavecerta.calculo.Grafico;
+import br.senai.chavecerta.calculo.Interpretacao;
 import br.senai.chavecerta.calculo.Premissas;
 import br.senai.chavecerta.calculo.Proposta;
 import br.senai.chavecerta.calculo.ResultadoProposta;
@@ -38,6 +39,7 @@ public class SimulacaoController {
         List<Proposta> propostas = entrada.paraPropostas();
         List<ResultadoProposta> resultados = CalculadoraPrecificacao.calcularTodas(premissas, propostas);
         Grafico grafico = CalculadoraPrecificacao.montarGrafico(premissas, propostas);
-        return ResponseEntity.ok(RespostaSimulacao.comResultados(premissas, resultados, grafico));
+        String interpretacao = Interpretacao.gerar(resultados);
+        return ResponseEntity.ok(RespostaSimulacao.comResultados(premissas, resultados, grafico, interpretacao));
     }
 }
