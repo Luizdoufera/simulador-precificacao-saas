@@ -204,12 +204,49 @@ async function calcular(evento) {
     const dados = await resposta.json();
     if (dados.erros && dados.erros.length > 0) {
         mostrarErros(dados.erros);
+        campo("btnCsv").disabled = true;
         return;
     }
+    campo("btnCsv").disabled = false; // RF12: exportar só depois de calcular
     campo("interpretacao").textContent = dados.interpretacao;
     mostrarTabela(dados);
     mostrarGrafico(dados.grafico);
 }
 
+// ---------- Exportar CSV (RF12) ----------
+
+async function exportarCsv() {
+    limparErros();
+
+    let resposta;
+    try {
+        resposta = await fetch("/api/exportar-csv", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(lerEntrada()),
+        });
+    } catch {
+        campo("erroGeral").textContent = "Não foi possível falar com o servidor. Ele está rodando?";
+        return;
+    }
+
+    if (!resposta.ok) {
+        // dados alterados depois do cálculo e agora inválidos
+        const dados = await resposta.json();
+        mostrarErros(dados.erros);
+        campo("resultados").hidden = true;
+        return;
+    }
+
+    // Baixa o arquivo recebido do servidor
+    const arquivo = await resposta.blob();
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(arquivo);
+    link.download = "simulacao_chavecerta.csv";
+    link.click();
+    URL.revokeObjectURL(link.href);
+}
+
 campo("btnExemplo").addEventListener("click", carregarExemplo);
+campo("btnCsv").addEventListener("click", exportarCsv);
 campo("formulario").addEventListener("submit", calcular);

@@ -25,6 +25,20 @@ Depois abra `http://localhost:8080` no navegador. Para parar o servidor, use `Ct
 mvn test
 ```
 
+## Funcionalidades (versão 1)
+- Premissas gerais e três propostas de preço, com botão "Carregar exemplo"
+- Tabela comparativa: receita, tributos, resultado, margem, contribuição unitária, equilíbrio e folga
+- Gráfico do resultado mensal por quantidade de oficinas (Chart.js via CDN; requer internet)
+- Interpretação gerada por regra
+- Validação dos campos com mensagem junto ao campo
+- Exportação em CSV (separador `;`, abre direto no Excel em português)
+
+## API
+| Método | Caminho | Retorno |
+|---|---|---|
+| POST | `/api/simular` | JSON com resultados, gráfico e interpretação (200) ou erros (400) |
+| POST | `/api/exportar-csv` | Arquivo `simulacao_chavecerta.csv` (200) ou erros em JSON (400) |
+
 ## Estrutura
 ```
 src/main/java/br/senai/chavecerta/   código Java
