@@ -94,6 +94,14 @@
                 <tbody id="corpoTabela"></tbody>
             </table>
         </div>
+
+        <!-- RF07: gráfico de resultado por quantidade de oficinas -->
+        <h2>Resultado mensal por quantidade de oficinas</h2>
+        <p class="nota">Cada linha cruza o zero no ponto de equilíbrio da proposta.
+            Acima da linha tracejada há sobra; abaixo, falta.</p>
+        <div class="grafico">
+            <canvas id="grafico"></canvas>
+        </div>
     </section>
 
     <!-- RF13: explicação dos indicadores -->
@@ -122,6 +130,7 @@
     </section>
 </main>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
