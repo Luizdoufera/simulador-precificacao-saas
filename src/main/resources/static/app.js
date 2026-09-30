@@ -128,6 +128,60 @@ function mostrarTabela({ premissas, resultados }) {
     campo("resultados").hidden = false;
 }
 
+// ---------- Gráfico (RF07) ----------
+
+const CORES = ["#1f5fae", "#d97706", "#15803d"]; // A, B, C
+let graficoAtual = null;
+
+function mostrarGrafico({ eixoXMaximo, series }) {
+    // Chart.js vem da CDN; sem internet, a tabela continua funcionando.
+    if (typeof Chart === "undefined") {
+        campo("erroGeral").textContent = "Gráfico indisponível: não foi possível carregar o Chart.js (sem internet?).";
+        return;
+    }
+
+    const linhas = series.map((serie, i) => ({
+        label: `Proposta ${serie.nome} (${moeda.format(serie.preco)})`,
+        data: serie.pontos.map((p) => ({ x: p.clientes, y: p.resultado })),
+        borderColor: CORES[i],
+        backgroundColor: CORES[i],
+        pointRadius: 3,
+        tension: 0,
+    }));
+    linhas.push({
+        label: "Resultado zero",
+        data: [{ x: 0, y: 0 }, { x: eixoXMaximo, y: 0 }],
+        borderColor: "#6b7280",
+        borderDash: [6, 4],
+        borderWidth: 1,
+        pointRadius: 0,
+    });
+
+    if (graficoAtual) graficoAtual.destroy();
+    graficoAtual = new Chart(campo("grafico"), {
+        type: "line",
+        data: { datasets: linhas },
+        options: {
+            maintainAspectRatio: false,
+            animation: false,
+            scales: {
+                x: { type: "linear", min: 0, max: eixoXMaximo, title: { display: true, text: "Quantidade de oficinas" } },
+                y: {
+                    title: { display: true, text: "Resultado mensal (R$)" },
+                    ticks: { callback: (valor) => moeda.format(valor) },
+                },
+            },
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: (ctx) => `${ctx.dataset.label}: ${moeda.format(ctx.parsed.y)} com ${ctx.parsed.x} oficinas`,
+                    },
+                },
+            },
+        },
+    });
+}
+
 // ---------- Cálculo via API ----------
 
 async function calcular(evento) {
@@ -153,6 +207,7 @@ async function calcular(evento) {
         return;
     }
     mostrarTabela(dados);
+    mostrarGrafico(dados.grafico);
 }
 
 campo("btnExemplo").addEventListener("click", carregarExemplo);
