@@ -3,7 +3,9 @@ package br.senai.chavecerta.web;
 import br.senai.chavecerta.calculo.CalculadoraPrecificacao;
 import br.senai.chavecerta.calculo.EntradaSimulacao;
 import br.senai.chavecerta.calculo.ErroValidacao;
+import br.senai.chavecerta.calculo.Grafico;
 import br.senai.chavecerta.calculo.Premissas;
+import br.senai.chavecerta.calculo.Proposta;
 import br.senai.chavecerta.calculo.ResultadoProposta;
 import br.senai.chavecerta.calculo.Validador;
 import java.util.List;
@@ -33,8 +35,9 @@ public class SimulacaoController {
         }
 
         Premissas premissas = entrada.paraPremissas();
-        List<ResultadoProposta> resultados =
-                CalculadoraPrecificacao.calcularTodas(premissas, entrada.paraPropostas());
-        return ResponseEntity.ok(RespostaSimulacao.comResultados(premissas, resultados));
+        List<Proposta> propostas = entrada.paraPropostas();
+        List<ResultadoProposta> resultados = CalculadoraPrecificacao.calcularTodas(premissas, propostas);
+        Grafico grafico = CalculadoraPrecificacao.montarGrafico(premissas, propostas);
+        return ResponseEntity.ok(RespostaSimulacao.comResultados(premissas, resultados, grafico));
     }
 }

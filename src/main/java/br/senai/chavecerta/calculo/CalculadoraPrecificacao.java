@@ -3,6 +3,7 @@ package br.senai.chavecerta.calculo;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
+import java.util.TreeSet;
 
 /**
  * Núcleo de cálculo do simulador. Métodos puros: recebem dados e retornam
@@ -51,6 +52,41 @@ public final class CalculadoraPrecificacao {
     public static List<ResultadoProposta> calcularTodas(Premissas premissas, List<Proposta> propostas) {
         return propostas.stream()
                 .map(proposta -> calcular(premissas, proposta))
+                .toList();
+    }
+
+    /**
+     * Monta os dados do gráfico (RF07): eixo X de 0 até o dobro do maior volume
+     * informado. Se todos os volumes forem 0, usa 10 para o gráfico não ficar vazio.
+     */
+    public static Grafico montarGrafico(Premissas premissas, List<Proposta> propostas) {
+        int maiorVolume = propostas.stream().mapToInt(Proposta::clientes).max().orElse(0);
+        int eixoXMaximo = maiorVolume > 0 ? (int) Math.min(2L * maiorVolume, Integer.MAX_VALUE) : 10;
+
+        List<Grafico.Serie> series = propostas.stream()
+                .map(proposta -> new Grafico.Serie(proposta.nome(), proposta.preco(),
+                        pontosDaSerie(premissas, proposta, eixoXMaximo)))
+                .toList();
+        return new Grafico(eixoXMaximo, series);
+    }
+
+    /**
+     * Pontos de uma linha: 0, o volume estimado, o equilíbrio e o fim do eixo.
+     * Cada resultado é calculado pela mesma fórmula da tabela.
+     */
+    private static List<Grafico.Ponto> pontosDaSerie(Premissas premissas, Proposta proposta, int eixoXMaximo) {
+        TreeSet<Integer> volumes = new TreeSet<>(List.of(0, eixoXMaximo));
+        if (proposta.clientes() <= eixoXMaximo) {
+            volumes.add(proposta.clientes());
+        }
+        ResultadoProposta resultado = calcular(premissas, proposta);
+        if (resultado.temEquilibrio() && resultado.equilibrio() <= eixoXMaximo) {
+            volumes.add(resultado.equilibrio());
+        }
+
+        return volumes.stream()
+                .map(n -> new Grafico.Ponto(n,
+                        calcular(premissas, new Proposta(proposta.nome(), proposta.preco(), n)).resultado()))
                 .toList();
     }
 
