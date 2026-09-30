@@ -175,6 +175,48 @@ class CalculadoraPrecificacaoTest {
     }
 
     @Test
+    @DisplayName("Gráfico: eixo X até o dobro do maior volume e linhas começando em −custo fixo")
+    void graficoDoExemplo() {
+        Grafico g = CalculadoraPrecificacao.montarGrafico(PADRAO, List.of(
+                new Proposta("A", 40, 130),
+                new Proposta("B", 50, 100),
+                new Proposta("C", 70, 80)));
+
+        assertEquals(260, g.eixoXMaximo());
+        assertEquals(3, g.series().size());
+        for (Grafico.Serie serie : g.series()) {
+            Grafico.Ponto primeiro = serie.pontos().get(0);
+            Grafico.Ponto ultimo = serie.pontos().get(serie.pontos().size() - 1);
+            assertEquals(0, primeiro.clientes());
+            assertEquals(-3000.00, primeiro.resultado(), TOLERANCIA);
+            assertEquals(260, ultimo.clientes());
+        }
+    }
+
+    @Test
+    @DisplayName("Gráfico: a linha muda de sinal no equilíbrio (RF07)")
+    void graficoCruzaZeroNoEquilibrio() {
+        Grafico g = CalculadoraPrecificacao.montarGrafico(PADRAO, List.of(new Proposta("B", 50, 100)));
+        List<Grafico.Ponto> pontos = g.series().get(0).pontos();
+
+        // pontos esperados: 0, 86 (equilíbrio), 100 (estimado) e 200 (fim do eixo)
+        assertEquals(List.of(0, 86, 100, 200), pontos.stream().map(Grafico.Ponto::clientes).toList());
+        assertEquals(10.00, pontos.get(1).resultado(), TOLERANCIA);
+        assertEquals(500.00, pontos.get(2).resultado(), TOLERANCIA);
+    }
+
+    @Test
+    @DisplayName("Gráfico: sem equilíbrio, a linha só desce; volumes zerados usam eixo até 10")
+    void graficoSemEquilibrio() {
+        Grafico g = CalculadoraPrecificacao.montarGrafico(PADRAO, List.of(new Proposta("A", 11, 0)));
+
+        assertEquals(10, g.eixoXMaximo());
+        List<Grafico.Ponto> pontos = g.series().get(0).pontos();
+        assertEquals(List.of(0, 10), pontos.stream().map(Grafico.Ponto::clientes).toList());
+        assertEquals(-3001.00, pontos.get(1).resultado(), TOLERANCIA);
+    }
+
+    @Test
     @DisplayName("Teto arredondado: resíduo de ponto flutuante não aumenta o equilíbrio")
     void tetoIgnoraResiduo() {
         assertEquals(75, CalculadoraPrecificacao.tetoArredondado(75.00000000001));

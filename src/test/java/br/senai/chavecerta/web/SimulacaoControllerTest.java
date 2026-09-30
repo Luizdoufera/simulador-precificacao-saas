@@ -42,7 +42,10 @@ class SimulacaoControllerTest {
                 .andExpect(jsonPath("$.resultados[0].resultado").value(380.0))
                 .andExpect(jsonPath("$.resultados[1].resultado").value(500.0))
                 .andExpect(jsonPath("$.resultados[1].equilibrio").value(86))
-                .andExpect(jsonPath("$.resultados[2].resultado").value(1240.0));
+                .andExpect(jsonPath("$.resultados[2].resultado").value(1240.0))
+                .andExpect(jsonPath("$.grafico.eixoXMaximo").value(260))
+                .andExpect(jsonPath("$.grafico.series.length()").value(3))
+                .andExpect(jsonPath("$.grafico.series[0].pontos[0].resultado").value(-3000.0));
     }
 
     @Test
