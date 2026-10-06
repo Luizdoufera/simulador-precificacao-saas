@@ -16,9 +16,6 @@
 | 05 | 29/09/2026 | Correção: erro ao executar o projeto | – |
 | 06 | 29/09/2026 | API e interface (Passo 6) | `08849e9`, `7366ec8` |
 | 07 | 29/09/2026 | Gráfico, interpretação e exportação CSV | `733c672`, `a95a174`, `6281aa4`, `fd8e80d`, `17b1267`, `a982d22` |
-| 08 | 06/10/2026 | Explicação do funcionamento e dos cálculos | – |
-| 09 | 06/10/2026 | Revisão contra o enunciado e README (Passo 8) | `f478185` |
-| 10 | 06/10/2026 | Reorganização deste registro | (commit deste arquivo) |
 
 ## Sugestões da IA revisadas, corrigidas ou rejeitadas
 
@@ -135,35 +132,3 @@ Feitos antes deste registro. Os documentos resultantes são `docs/Atividade_ Apl
   - o CSV baixado tem os mesmos valores da tabela.
 - **Decisão humana:** aceito.
 - **Commits:** `733c672`, `a95a174` (gráfico); `6281aa4`, `fd8e80d` (interpretação); `17b1267`, `a982d22` (CSV).
-
-### 08 – 06/10/2026 – Explicação do funcionamento e dos cálculos
-- **Integrante:** Luiz Fernando
-- **Objetivo:** compreender a aplicação para validá-la e defendê-la.
-- **Prompt:** "Estamos executando o projeto. Explique como a aplicação funciona e como cada cálculo é realizado."
-- **Resposta da IA:** explicou o uso da tela, o caminho do cálculo (tela → API → validador → calculadora → resposta), cada fórmula com a proposta B passo a passo, os casos especiais, o gráfico, a interpretação, o CSV e como conferir pelos testes.
-- **Arquivos alterados:** nenhum.
-- **Verificação:** o integrante executou o projeto localmente e acompanhou a explicação na tela.
-- **Decisão humana:** usar a explicação como base para a defesa.
-
-### 09 – 06/10/2026 – Revisão contra o enunciado e README (Passo 8)
-- **Integrante:** Luiz Fernando
-- **Objetivo:** verificar o que faltava em relação ao enunciado e adequar o README.
-- **Prompts:** "Analise o enunciado da atividade (opção 2) e liste o que ainda falta no projeto, sem realizar alterações." Depois: "Ajuste o README para atender aos itens exigidos no enunciado e faça o commit correspondente."
-- **Resposta da IA:**
-  - listou as pendências: análise de sensibilidade, cenários, relatório de decisão, evidências de testes, CSV exportado, registro de IA e README;
-  - reescreveu o README com objetivo, integrantes, tecnologia, instalação, execução, testes, dados de exemplo, exemplo de uso, indicadores e limitações.
-- **Arquivos alterados:** `README.md`.
-- **Verificação:**
-  - `mvn -B test` → 39 testes, 0 falhas;
-  - o exemplo novo do README (proposta C com 50 oficinas) foi rodado no núcleo: resultado −350,00, e a interpretação muda para a proposta B, como o texto descreve.
-- **Decisão humana:** priorizar o README; os demais itens ficaram como pendências.
-- **Commit:** `f478185` – README conforme os entregáveis da atividade.
-
-### 10 – 06/10/2026 – Reorganização deste registro
-- **Integrante:** Luiz Fernando
-- **Objetivo:** adequar este registro ao formato exigido no enunciado.
-- **Prompt:** "Reescreva o registro_ia.md no formato exigido pelo enunciado, com entradas correspondentes aos commits realizados."
-- **Resposta da IA:** reorganizou o registro com uma entrada por etapa, os campos exigidos, a relação com os commits e a tabela de sugestões revisadas, corrigidas ou rejeitadas.
-- **Arquivos alterados:** `registro_ia.md`.
-- **Verificação:** os hashes e as datas da tabela foram conferidos com `git log`.
-- **Decisão humana:** aceito.
