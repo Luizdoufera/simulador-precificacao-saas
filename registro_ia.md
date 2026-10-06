@@ -10,12 +10,12 @@
 | Nº | Data | Etapa | Commits |
 |---|---|---|---|
 | 01 | 29/09/2026 | Análise do projeto e dos documentos | – |
-| 02 | 29/09/2026 | Contexto, registro e escolha da tecnologia | `f482805` |
-| 03 | 29/09/2026 | Repositório Git e esqueleto Spring Boot (Passo 4) | `dab4aef` |
-| 04 | 29/09/2026 | Núcleo de cálculo e validação (Passo 5) | `c9fd180`, `d9588dc` |
+| 02 | 29/09/2026 | Contexto, registro e escolha da tecnologia | `05fbbab` |
+| 03 | 29/09/2026 | Repositório Git e esqueleto Spring Boot (Passo 4) | `4dd6b95` |
+| 04 | 29/09/2026 | Núcleo de cálculo e validação (Passo 5) | `90ca5ab`, `b62e3cc` |
 | 05 | 29/09/2026 | Correção: erro ao executar o projeto | – |
-| 06 | 29/09/2026 | API e interface (Passo 6) | `08849e9`, `7366ec8` |
-| 07 | 29/09/2026 | Gráfico, interpretação e exportação CSV | `733c672`, `a95a174`, `6281aa4`, `fd8e80d`, `17b1267`, `a982d22` |
+| 06 | 29/09/2026 | API e interface (Passo 6) | `2e05035`, `fdadd73` |
+| 07 | 29/09/2026 | Gráfico, interpretação e exportação CSV | `f11d868`, `daf34ce`, `97f4f05`, `2d90260`, `a099866`, `6aa7b3d` |
 
 ## Sugestões da IA revisadas, corrigidas ou rejeitadas
 
@@ -57,7 +57,7 @@ Feitos antes deste registro. Os documentos resultantes são `docs/Atividade_ Apl
 - **Arquivos alterados:** `CLAUDE.md`, `requisitos.md`, `modelo_calculos.md`; criados `contexto_atividade.md` e `registro_ia.md`.
 - **Verificação:** a equipe revisou as correções e a estrutura proposta.
 - **Decisão humana:** **rejeitou a sugestão de Swing** e escolheu Java web com Spring Boot; aprovou a estrutura.
-- **Commit:** `f482805` – Documentação inicial do projeto.
+- **Commit:** `05fbbab` – Documentação inicial do projeto.
 
 ### 03 – 29/09/2026 – Repositório Git e esqueleto Spring Boot (Passo 4)
 - **Integrante:** Luiz Fernando
@@ -70,7 +70,7 @@ Feitos antes deste registro. Os documentos resultantes são `docs/Atividade_ Apl
   - o servidor iniciou ("Tomcat started on port 8080");
   - `http://localhost:8080` respondeu HTTP 200.
 - **Decisão humana:** aceito; seguir para o núcleo de cálculo.
-- **Commit:** `dab4aef` – Esqueleto do projeto Spring Boot.
+- **Commit:** `4dd6b95` – Esqueleto do projeto Spring Boot.
 
 ### 04 – 29/09/2026 – Núcleo de cálculo e validação (Passo 5)
 - **Integrante:** Luiz Fernando
@@ -86,7 +86,7 @@ Feitos antes deste registro. Os documentos resultantes são `docs/Atividade_ Apl
   - a demonstração mostrou A = 380, B = 500 e C = 1.240, e equilíbrios 116, 86 e 57, iguais ao documento do grupo;
   - os casos especiais (preço 11 sem equilíbrio, 0 oficinas com margem "não se aplica") e as mensagens de erro estavam corretos.
 - **Decisão humana:** aceito.
-- **Commits:** `c9fd180` – Núcleo de cálculo e testes T1, T2, T4-T8; `d9588dc` – Validação das entradas e teste T3.
+- **Commits:** `90ca5ab` – Núcleo de cálculo e testes T1, T2, T4-T8; `b62e3cc` – Validação das entradas e teste T3.
 
 ### 05 – 29/09/2026 – Correção: erro ao executar o projeto
 - **Integrante:** Luiz Fernando
@@ -111,7 +111,7 @@ Feitos antes deste registro. Os documentos resultantes são `docs/Atividade_ Apl
   - a API retornou HTTP 200 com o exemplo e HTTP 400 com o custo fixo vazio;
   - capturas de tela mostraram a tabela igual ao documento do grupo, os erros embaixo dos campos e os casos especiais.
 - **Decisão humana:** aceito; os textos da explicação dos indicadores ficaram para revisão da equipe.
-- **Commits:** `08849e9` – API REST de simulação; `7366ec8` – Tela com formulário, exemplo e tabela.
+- **Commits:** `2e05035` – API REST de simulação; `fdadd73` – Tela com formulário, exemplo e tabela.
 
 ### 07 – 29/09/2026 – Gráfico, interpretação e exportação CSV
 - **Integrante:** Luiz Fernando
@@ -131,4 +131,4 @@ Feitos antes deste registro. Os documentos resultantes são `docs/Atividade_ Apl
   - o texto da interpretação é igual ao esperado no modelo;
   - o CSV baixado tem os mesmos valores da tabela.
 - **Decisão humana:** aceito.
-- **Commits:** `733c672`, `a95a174` (gráfico); `6281aa4`, `fd8e80d` (interpretação); `17b1267`, `a982d22` (CSV).
+- **Commits:** `f11d868`, `daf34ce` (gráfico); `97f4f05`, `2d90260` (interpretação); `a099866`, `6aa7b3d` (CSV).
